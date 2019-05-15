@@ -1,0 +1,56 @@
+﻿<Window x:Class="Arduino.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Arduino"
+        xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+        xmlns:zedgraph="clr-namespace:ZedGraph;assembly=ZedGraph"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Viewbox Stretch="Fill">
+        <Grid>
+            <ComboBox x:Name="selSedal" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" SelectionChanged="PortSelected" Margin="70,40,0,0"/>
+            <ComboBox x:Name="SelSpeed" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" SelectionChanged="BaudSelected" Margin="70,100,0,0"/>
+            <Button x:Name="buttonConnect" Content="连接" HorizontalAlignment="Left" Margin="50,150,0,0" VerticalAlignment="Top" Width="60" Click="BtnConnected"/>
+            <Button x:Name="buttonDiscont" Content="断开" HorizontalAlignment="Left" Margin="150,150,0,0" VerticalAlignment="Top" Width="60" Click="BtnDisconted"/>
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="220" Height="300" Margin="0,0,40,0">
+                <ListView x:Name="msgSend" HorizontalAlignment="Left" VerticalAlignment="Top" Height="120" Width="100"/>
+                <ListView x:Name="msgRead" HorizontalAlignment="Right" VerticalAlignment="Top" Height="120" Width="100"/>
+                <Grid Height="23" Width="95" HorizontalAlignment="Left">
+                    <TextBox x:Name="textT" HorizontalAlignment="Right" VerticalAlignment="Center" TextWrapping="Wrap" Width="60" FontSize="16" Text="{Binding Path=Text}"/>
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Width="35" TextAlignment="Center" FontSize="16" Text="温度"/>
+                </Grid>
+                <Grid Height="23" Width="95" HorizontalAlignment="Right">
+                    <TextBox x:Name="textL" HorizontalAlignment="Right" VerticalAlignment="Center" TextWrapping="Wrap" Width="60" FontSize="16" Text="{Binding Path=Text}"/>
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" TextWrapping="Wrap" Width="35" TextAlignment="Center" FontSize="16" Text="光强"/>
+                </Grid>
+                <wfi:WindowsFormsHost HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="120" Width="100">
+                    <zedgraph:ZedGraphControl x:Name="graphT"/>
+                </wfi:WindowsFormsHost>
+                <wfi:WindowsFormsHost HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="120" Width="100">
+                    <zedgraph:ZedGraphControl x:Name="graphL"/>
+                </wfi:WindowsFormsHost>
+            </Grid>
+            <Grid x:Name="gridRGB" HorizontalAlignment="Right" VerticalAlignment="Top" Width="220" Margin="0,40,40,0">
+                <Slider x:Name="sliderR" Uid="R" HorizontalAlignment="Right" VerticalAlignment="Top" Width="180" TickPlacement="BottomRight" Margin="0,0,0,0" ValueChanged="SliderSlided"/>
+                <Slider x:Name="sliderG" Uid="G" HorizontalAlignment="Right" VerticalAlignment="Top" Width="180" TickPlacement="BottomRight" Margin="0,30,0,0" ValueChanged="SliderSlided"/>
+                <Slider x:Name="sliderY" Uid="Y" HorizontalAlignment="Right" VerticalAlignment="Top" Width="180" TickPlacement="BottomRight" Margin="0,60,0,0" ValueChanged="SliderSlided"/>
+                <Slider x:Name="sliderB" Uid="B" HorizontalAlignment="Right" VerticalAlignment="Top" Width="180" TickPlacement="BottomRight" Margin="0,90,0,0" ValueChanged="SliderSlided"/>
+                <Slider x:Name="sliderW" Uid="W" HorizontalAlignment="Right" VerticalAlignment="Top" Width="180" TickPlacement="BottomRight" Margin="0,120,0,0" ValueChanged="SliderSlided"/>
+                <TextBlock Text="红灯" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" TextAlignment="Center" FontSize="14" Margin="0,0,0,0"/>
+                <TextBlock Text="绿灯" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" TextAlignment="Center" FontSize="14" Margin="0,30,0,0"/>
+                <TextBlock Text="黄灯" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" TextAlignment="Center" FontSize="14" Margin="0,60,0,0"/>
+                <TextBlock Text="蓝灯" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" TextAlignment="Center" FontSize="14" Margin="0,90,0,0"/>
+                <TextBlock Text="白灯" HorizontalAlignment="Left" VerticalAlignment="Top" Width="35" TextAlignment="Center" FontSize="14" Margin="0,120,0,0"/>
+            </Grid>
+            <Button x:Name="buttonSend" Content="发送" HorizontalAlignment="Left" Margin="570,220,0,0" VerticalAlignment="Top" Width="60" Height="36" Click="SendRGBValue"/>
+            <Button x:Name="buttonBgn" Content="log开始" HorizontalAlignment="Right" Margin="0,0,170,60" VerticalAlignment="Bottom" Width="60" Click="ButtonBgn_Click"/>
+            <Button x:Name="buttonEnd" Content="log结束" HorizontalAlignment="Right" Margin="630,250,50,60" VerticalAlignment="Bottom" Width="60" Click="LogEndClick"/>
+            <Ellipse x:Name="colorBlock" HorizontalAlignment="Left" Height="20" Margin="570,192,0,0" Stroke="Black" VerticalAlignment="Top" Width="20"/>
+            <Label x:Name="label" Content="颜色块" HorizontalAlignment="Left" Margin="590,190,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="btnOk" Content="OK" HorizontalAlignment="Left" Margin="510,300,0,30" VerticalAlignment="Bottom" Width="60" Click="BtnOkClick"/>
+            <Button x:Name="btnCl" Content="Cancel" HorizontalAlignment="Left" Margin="630,300,0,0" VerticalAlignment="Top" Width="60" Height="19" Click="BtnClClick"/>
+        </Grid>
+    </Viewbox>
+</Window>

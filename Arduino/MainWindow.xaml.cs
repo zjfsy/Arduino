@@ -243,9 +243,9 @@ namespace Arduino
         }
         private void ButtonBgn_Click(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.DefaultExt = ".xml";
-            dlg.Filter = "xml文件(.xml)|*.xml";
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.FileName = $"log-{DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss")}.xml";
+            dlg.Filter = "xml文件(*.xml)|*.xml";
             dlg.RestoreDirectory = true;
             if (dlg.ShowDialog().Value)
             {

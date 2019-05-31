@@ -50,13 +50,13 @@ void runPCMsg(){
   }
 }
 void sendMsgT(){
-  int m=analogRead(A0);
+  int m=analogRead(T);
   Serial.write(0xE0);
   Serial.write(m&0x7F);
   Serial.write(m>>0x7);
 }
 void sendMsgL(){
-  int m=analogRead(A1);
+  int m=analogRead(L);
   Serial.write(0xE1);
   Serial.write(m&0x7F);
   Serial.write(m>>0x7);

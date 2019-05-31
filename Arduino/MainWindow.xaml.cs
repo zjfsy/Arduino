@@ -46,28 +46,36 @@ namespace Arduino
         {
             for (int i = port.BytesToRead; i > 0; i--)
             {
-                msg[len] = (byte)port.ReadByte();
-                len++;
-                if (len == 3)
+                byte rb = (byte)port.ReadByte();
+                if (len > 0 && rb >> 7 > 0)
                 {
-                    if (DisposeMsg())
-                    {
-                        string[] s = new string[3];
-                        for (int j = 0; j < 3; j++)
-                        {
-                            s[j] = msg[j].ToString("X2");
-                        }
-                        string read = string.Join(" ", s);
-                        Dispatcher.BeginInvoke(new Action(delegate ()
-                        {
-                            msgRead.Items.Add(read);
-                        }));
-                        if (log)
-                        {
-                            readlog.Add(read);
-                        }
-                    }
                     len = 0;
+                }
+                if (len > 0 || rb >> 7 > 0)
+                {
+                    msg[len] = rb;
+                    len++;
+                    if (len == 3)
+                    {
+                        if (DisposeMsg())
+                        {
+                            string[] s = new string[3];
+                            for (int j = 0; j < 3; j++)
+                            {
+                                s[j] = msg[j].ToString("X2");
+                            }
+                            string read = string.Join(" ", s);
+                            Dispatcher.BeginInvoke(new Action(delegate ()
+                            {
+                                msgRead.Items.Add(read);
+                            }));
+                            if (log)
+                            {
+                                readlog.Add(read);
+                            }
+                        }
+                        len = 0;
+                    }
                 }
             }
         }
